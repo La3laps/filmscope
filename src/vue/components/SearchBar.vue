@@ -5,7 +5,7 @@
     <input
       :value="modelValue"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
-      placeholder="Rechercher un film..."
+      placeholder="Browse movies..."
       type="search"
     />
   </div>

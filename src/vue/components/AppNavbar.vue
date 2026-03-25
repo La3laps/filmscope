@@ -3,8 +3,10 @@
     <div class="container">
       <div class="logo">
         <span class="threeD-icon">
-          <div class="container-logo">FilmScope</div>
-          <div class="container-logo">
+          <div class="container-logo logo-title">
+            <img class="logo-img" src="/FilmSCOPE_no_bg.png" alt="logo" />
+          </div>
+          <div class="container-logo tree-container">
             <RotatingTreeIcon />
           </div>
         </span>
@@ -34,6 +36,11 @@ const searchStore = useSearchStore()
 </script>
 
 <style scoped>
+@font-face {
+  font-family: 'Wild Wood';
+  src: url('/fonts/Jfwildwood-ldYZ.ttf') format('truetype');
+}
+
 .navbar {
   position: sticky;
   top: 0;
@@ -56,14 +63,39 @@ header {
 
 .logo {
   color: #fff;
-  font-weight: 800;
-  font-size: 18px;
 }
 
 .threeD-icon {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-logo {
+  width: 200px;
+  height: 200px;
   position: absolute;
-  top: 0;
-  left: 0;
+}
+
+.logo-title {
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Wild Wood', sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--main-green-light);
+  text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.5),
+    0 0 8px rgba(45, 80, 22, 0.3);
+}
+
+.tree-container {
+  z-index: 1;
 }
 
 nav ul {
@@ -116,7 +148,12 @@ nav a:hover::before {
   width: 100%;
 }
 
-/* Active route */
+.logo-img {
+  filter: invert(1);
+  width: 80%;
+  height: auto;
+}
+
 .router-link-active {
   color: #fff;
 }

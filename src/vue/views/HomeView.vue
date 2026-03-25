@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <AppPagination
+      v-show="totalPages > 1"
       v-model:page="currentPage"
       :has-next-page="hasNextPage"
       :total-pages="totalPages"
@@ -22,9 +23,10 @@
       />
     </TransitionGroup>
 
-    <div v-if="!isLoading && films.length === 0" class="no-results">No movies found.</div>
+    <div v-if="!isLoading && films.length === 0" class="no-results">❌ No movies found ❌</div>
 
     <AppPagination
+      v-show="totalPages > 1"
       v-model:page="currentPage"
       :has-next-page="hasNextPage"
       :total-pages="totalPages"

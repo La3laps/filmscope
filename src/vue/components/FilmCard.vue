@@ -1,7 +1,7 @@
 <template>
   <div class="film-card" @click="goToDetail">
     <img
-      :src="film.poster_path ? IMAGE_URL + film.poster_path : '/background.jpg'"
+      :src="film.poster_path ? IMAGE_URL + film.poster_path : '/background_orange.jpg'"
       :alt="film.title"
       class="film-poster"
       @load="onImageLoad"
