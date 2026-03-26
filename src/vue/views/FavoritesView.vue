@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import FilmCard from '@/vue/components/FilmCard.vue'
-import { useFavoritesStore } from '@/typescript/stores/favorites'
+import { useFavoritesStore } from '@/typescript/stores'
 
 const favoritesStore = useFavoritesStore()
 </script>

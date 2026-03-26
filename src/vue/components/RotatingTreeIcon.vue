@@ -63,8 +63,8 @@ function loadModel() {
         '/low_poly_tree/Lowpoly_tree_sample.obj',
         (object) => {
           tree = object
-          tree.scale.setScalar(3) // bigger
-          tree.position.set(0, -1.2, 0) // lower center
+          tree.scale.setScalar(3)
+          tree.position.set(0, -1.2, 0)
           scene.add(tree)
         },
         undefined,

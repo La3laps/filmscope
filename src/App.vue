@@ -1,19 +1,41 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import AppNavbar from '@/vue/components/AppNavbar.vue'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const isVisible = ref(false)
+const isOut = ref(false)
 
 onMounted(() => {
   setTimeout(() => {
     isVisible.value = true
   }, 100)
 })
+
+watch(
+  () => route.path,
+  (newPath) => {
+    if (newPath.startsWith('/film/')) {
+      isOut.value = true
+    } else {
+      isOut.value = false
+      isVisible.value = true
+    }
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
-  <div :class="{ 'navbar-container': true, 'animate-in': isVisible }">
-    <AppNavbar />
+  <div
+    :class="{
+      'navbar-container': true,
+      'animate-in': isVisible && !isOut,
+      'animate-out': isOut,
+    }"
+  >
+    <AppNavbar v-if="route.name !== '/film'" />
   </div>
   <router-view />
 </template>

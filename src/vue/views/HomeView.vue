@@ -11,6 +11,8 @@
       <AppSpinner />
     </div>
 
+    <SelectSortMovieComponent v-model="sortBy" />
+
     <TransitionGroup name="stagger" tag="div" class="film-grid">
       <FilmCard
         v-for="(film, index) in films"
@@ -38,21 +40,21 @@
 import { ref, onMounted, computed, watch } from 'vue'
 import { watchDebounced } from '@vueuse/core'
 
-import { getPopularMovies, searchMovies } from '@/typescript/services/get-movies-service'
-import { useFavoritesStore } from '@/typescript/stores/favorites'
-import { useSearchStore } from '@/typescript/stores/search'
-
-import type { Movie } from '@/typescript/models/types/movies'
+import { discoverMovies, searchMovies } from '@/typescript/services'
+import { useFavoritesStore, useSearchStore } from '@/typescript/stores'
+import type { Movie } from '@/typescript/models/types'
 
 import FilmCard from '@/vue/components/FilmCard.vue'
 import AppSpinner from '@/vue/components/AppSpinner.vue'
 import AppPagination from '@/vue/components/AppPagination.vue'
+import SelectSortMovieComponent from '@/vue/components/SelectSortMovieComponent.vue'
 
 const films = ref<Movie[]>([])
 const totalPages = ref(1)
 const currentPage = ref(1)
 const loadedImages = ref(0)
 const isLoading = ref(false)
+const sortBy = ref('popularity.desc')
 
 const favoritesStore = useFavoritesStore()
 const searchStore = useSearchStore()
@@ -67,7 +69,7 @@ async function fetchMovies() {
 
   const data = searchStore.query.trim()
     ? await searchMovies(searchStore.query, currentPage.value)
-    : await getPopularMovies(currentPage.value)
+    : await discoverMovies(currentPage.value, sortBy.value)
 
   films.value = data.results
   totalPages.value = Math.min(data.total_pages, 500)
@@ -75,10 +77,12 @@ async function fetchMovies() {
   if (currentPage.value > totalPages.value) {
     currentPage.value = totalPages.value
   }
+
   isLoading.value = false
 }
+
 watchDebounced(
-  () => [searchStore.query, currentPage.value],
+  () => [searchStore.query, currentPage.value, sortBy.value],
   () => {
     fetchMovies()
   },

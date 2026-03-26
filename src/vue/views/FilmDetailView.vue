@@ -35,9 +35,11 @@
         <p>{{ film.overview || 'No description available.' }}</p>
       </div>
 
-      <div v-if="film.youtube_id" class="film-trailer">
+      <div class="film-trailer">
         <h2>Movie Trailer</h2>
-        <div class="video-container">
+
+        <!-- YouTube trailer -->
+        <div v-if="film.youtube_id" class="video-container">
           <iframe
             :src="`https://www.youtube.com/embed/${film.youtube_id}?autoplay=1&mute=1&loop=1&playlist=${film.youtube_id}&controls=0&modestbranding=1&rel=0&showinfo=0&playsinline=1&iv_load_policy=3`"
             frameborder="0"
@@ -53,11 +55,11 @@
             class="youtube-video"
           ></iframe>
         </div>
-      </div>
-    </div>
 
-    <div v-else class="loading">
-      <p>Loading movie...</p>
+        <div v-else class="no-trailer">
+          <p>No trailer available for this movie</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -65,16 +67,10 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router'
 import { ref, onMounted, computed } from 'vue'
-import type { Movie } from '@/typescript/models/types/movies'
-import { useFavoritesStore } from '@/typescript/stores/favorites'
-import { useFilmDetailStore } from '@/typescript/stores/filmDetail'
-import { getMovieVideos } from '@/typescript/services/get-movies-service'
+import { useFavoritesStore, useFilmDetailStore } from '@/typescript/stores'
+import { getMovieVideosById } from '@/typescript/services'
 
-interface Video {
-  key: string
-  site: string
-  type: string
-}
+import type { Movie, Video } from '@/typescript/models/types'
 
 const IMAGE_URL = import.meta.env.VITE_TMDB_IMAGE_URL
 const router = useRouter()
@@ -99,7 +95,7 @@ onMounted(async () => {
     film.value = { ...filmDetailStore.currentFilm }
 
     try {
-      const videosData = await getMovieVideos(film.value.id)
+      const videosData = await getMovieVideosById(film.value.id)
       const youtubeVideo = videosData.results.find(
         (video: Video) => video.site === 'YouTube' && video.type === 'Trailer',
       )
@@ -118,7 +114,8 @@ onMounted(async () => {
 <style scoped>
 .film-detail-container {
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  top: 0;
   right: 0;
   display: flex;
   flex-direction: column;
@@ -127,6 +124,33 @@ onMounted(async () => {
   background: rgba(0, 0, 0);
 }
 
+.no-trailer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  animation: pulse 2s infinite;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
 .film-detail {
   display: flex;
   flex-direction: column;
@@ -274,10 +298,10 @@ onMounted(async () => {
   border: none;
 
   color: #eee;
-  font-size: 16px;
+  font-size: 30px;
   cursor: pointer;
 
-  margin-bottom: 20px;
+  margin: 40px 0;
 
   padding: 5px 0;
 

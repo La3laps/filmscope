@@ -9,7 +9,6 @@ export async function getMovieTrailers(movieId: number) {
 
   const data = await res.json()
 
-  // Optional: only return YouTube trailers
   return data.results.filter(
     (video: { type: string; site: string }) => video.type === 'Trailer' && video.site === 'YouTube',
   )
