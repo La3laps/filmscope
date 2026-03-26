@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Movie } from '@/typescript/models/types/movies'
+import type { Movie } from '@/models/types/movies'
 import { ref } from 'vue'
 
 export const useFavoritesStore = defineStore('favorites', () => {

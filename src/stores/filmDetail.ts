@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { Movie } from '@/typescript/models/types/movies'
+import type { Movie } from '@/models/types/movies'
 
 export const useFilmDetailStore = defineStore('filmDetail', () => {
   const currentFilm = ref<Movie | null>(null)

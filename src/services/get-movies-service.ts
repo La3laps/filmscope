@@ -1,4 +1,4 @@
-import type { MoviesResponse } from '@/typescript/models/in/movies-response'
+import type { MoviesResponse } from '@/models/in/movies-response'
 
 export async function getPopularMovies(page = 1): Promise<MoviesResponse> {
   const normalizedPage = Math.min(Math.max(Math.round(page), 1), 500)

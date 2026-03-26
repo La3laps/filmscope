@@ -34,11 +34,11 @@
 </template>
 
 <script lang="ts" setup>
-import type { Movie } from '@/typescript/models/types'
+import type { Movie } from '@/models/types'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { useFilmDetailStore } from '@/typescript/stores'
+import { useFilmDetailStore } from '@/stores'
 
 const IMAGE_URL = import.meta.env.VITE_TMDB_IMAGE_URL
 const emit = defineEmits(['toggle-favorite', 'loaded'])

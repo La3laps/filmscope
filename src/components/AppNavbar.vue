@@ -33,9 +33,9 @@
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { useSearchStore } from '@/typescript/stores'
-import SearchBar from '@/vue/components/SearchBar.vue'
-import RotatingTreeIcon from '@/vue/components/RotatingTreeIcon.vue'
+import { useSearchStore } from '@/stores'
+import SearchBar from '@/components/SearchBar.vue'
+import RotatingTreeIcon from '@/components/RotatingTreeIcon.vue'
 
 const route = useRoute()
 const searchStore = useSearchStore()

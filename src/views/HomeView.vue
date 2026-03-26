@@ -41,14 +41,14 @@ import { ref, onMounted, computed, watch } from 'vue'
 import { watchDebounced } from '@vueuse/core'
 import { useRoute } from 'vue-router'
 
-import { discoverMovies, searchMovies } from '@/typescript/services'
-import { useFavoritesStore, useSearchStore } from '@/typescript/stores'
-import type { Movie } from '@/typescript/models/types'
+import { discoverMovies, searchMovies } from '@/services'
+import { useFavoritesStore, useSearchStore } from '@/stores'
+import type { Movie } from '@/models/types'
 
-import FilmCard from '@/vue/components/FilmCard.vue'
-import AppSpinner from '@/vue/components/AppSpinner.vue'
-import AppPagination from '@/vue/components/AppPagination.vue'
-import SelectSortMovieComponent from '@/vue/components/SelectSortMovieComponent.vue'
+import FilmCard from '@/components/FilmCard.vue'
+import AppSpinner from '@/components/AppSpinner.vue'
+import AppPagination from '@/components/AppPagination.vue'
+import SelectSortMovieComponent from '@/components/SelectSortMovieComponent.vue'
 
 const films = ref<Movie[]>([])
 const route = useRoute()

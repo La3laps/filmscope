@@ -67,10 +67,10 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router'
 import { ref, onMounted, computed } from 'vue'
-import { useFavoritesStore, useFilmDetailStore } from '@/typescript/stores'
-import { getMovieVideosById } from '@/typescript/services'
+import { useFavoritesStore, useFilmDetailStore } from '@/stores'
+import { getMovieVideosById } from '@/services'
 
-import type { Movie, Video } from '@/typescript/models/types'
+import type { Movie, Video } from '@/models/types'
 
 const IMAGE_URL = import.meta.env.VITE_TMDB_IMAGE_URL
 const router = useRouter()

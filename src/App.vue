@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, computed, watch } from 'vue'
-import AppNavbar from '@/vue/components/AppNavbar.vue'
+import AppNavbar from '@/components/AppNavbar.vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
