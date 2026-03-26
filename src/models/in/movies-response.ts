@@ -1,4 +1,4 @@
-import type { Movie } from '../types/movies'
+import type { Movie } from '@/models/types'
 
 export type MoviesResponse = {
   page: number
