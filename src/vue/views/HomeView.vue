@@ -11,7 +11,7 @@
       <AppSpinner />
     </div>
 
-    <SelectSortMovieComponent v-model="sortBy" />
+    <SelectSortMovieComponent v-show="!searchStore.query.trim()" v-model="sortBy" />
 
     <TransitionGroup name="stagger" tag="div" class="film-grid">
       <FilmCard
@@ -39,6 +39,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed, watch } from 'vue'
 import { watchDebounced } from '@vueuse/core'
+import { useRoute } from 'vue-router'
 
 import { discoverMovies, searchMovies } from '@/typescript/services'
 import { useFavoritesStore, useSearchStore } from '@/typescript/stores'
@@ -50,6 +51,7 @@ import AppPagination from '@/vue/components/AppPagination.vue'
 import SelectSortMovieComponent from '@/vue/components/SelectSortMovieComponent.vue'
 
 const films = ref<Movie[]>([])
+const route = useRoute()
 const totalPages = ref(1)
 const currentPage = ref(1)
 const loadedImages = ref(0)
