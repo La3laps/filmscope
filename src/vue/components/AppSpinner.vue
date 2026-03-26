@@ -13,9 +13,6 @@
   transform-origin: center;
   animation: pulse 1s infinite ease-in-out;
   animation-delay: calc(var(--i) * 0.15s);
-}
-
-svg {
   z-index: 1000;
 }
 

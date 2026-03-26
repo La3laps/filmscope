@@ -2,7 +2,6 @@
   "name": "filmscope",
   "version": "0.0.0",
   "private": true,
-  "homepage": "https://la3laps.github.io/filmscope",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -5,11 +5,9 @@
   --main-green-darker: #000;
 }
 
-html,
-#app {
+html {
   overflow-y: scroll;
   scrollbar-width: none;
-  height: 100%;
 }
 
 html::-webkit-scrollbar {

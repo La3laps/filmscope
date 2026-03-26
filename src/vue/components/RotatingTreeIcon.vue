@@ -54,13 +54,13 @@ function initThreeJS() {
 function loadModel() {
   const mtlLoader = new MTLLoader()
   mtlLoader.load(
-    '/low_poly_tree/Lowpoly_tree_sample.mtl',
+    '/filmscope/low_poly_tree/Lowpoly_tree_sample.mtl',
     (materials) => {
       materials.preload()
       const objLoader = new OBJLoader()
       objLoader.setMaterials(materials)
       objLoader.load(
-        '/low_poly_tree/Lowpoly_tree_sample.obj',
+        '/filmscope/low_poly_tree/Lowpoly_tree_sample.obj',
         (object) => {
           tree = object
           tree.scale.setScalar(3)
